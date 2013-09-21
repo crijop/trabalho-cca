@@ -5,6 +5,7 @@ Created on 18 de Set de 2013
 @author: carlos
 '''
 
+from OpenFile.analyse_file import AnalyseFile
 from PyQt4 import *
 from PySide import QtCore, QtGui
 from PySide.QtCore import *
@@ -31,7 +32,8 @@ class Open_Files(QDialog, Ui_MainWindow):
     # Evento do Botão Ok 
     def evt_ButtonOK(self):
         # Saber lista de directorias e nome ficheiro
-        caminhoFile = self.lineEdit_fileName.text()
+        caminhoFile = self.fname#self.lineEdit_fileName.text()
+        print caminhoFile
         listaDirectorias = caminhoFile.split("/")
         print  listaDirectorias
         
@@ -63,6 +65,7 @@ class Open_Files(QDialog, Ui_MainWindow):
                     
                     try:
                         # Trata o ficheiro
+                        AnalyseFile(caminhoFile)
                         pass
                     except:
                         QMessageBox.critical(self, "Atenção".decode("utf-8"), \
@@ -118,8 +121,12 @@ class Open_Files(QDialog, Ui_MainWindow):
 
     # Evento de abrir o ficheiro
     def evt_abrir(self):
-        fname, _ = QFileDialog.getOpenFileName(self, 'Open File', '')
-        self.lineEdit_fileName.setText(fname)
+        
+       
+        dialog = QFileDialog(self)
+        self.fname, _ = dialog.getOpenFileName(self, 'Abrir Ficheiro', '', filter="Ficheiros PSD (*.psd)")
+      
+        self.lineEdit_fileName.setText(self.fname)
         palette = QtGui.QPalette()
         palette.setColor(QtGui.QPalette.Foreground,QtCore.Qt.black)
         self.label_1_asterisco.setPalette(palette)

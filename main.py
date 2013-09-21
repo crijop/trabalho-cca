@@ -17,10 +17,3 @@ if __name__ == '__main__':
     a.exec_()
     app.exec_()
     pass
-
-
-
-
-
-
-   
