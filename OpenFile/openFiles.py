@@ -67,9 +67,9 @@ class Open_Files(QDialog, Ui_MainWindow):
                         # Trata o ficheiro
                         AnalyseFile(caminhoFile)
                         pass
-                    except:
+                    except Exception as ex:
                         QMessageBox.critical(self, "Atenção".decode("utf-8"), \
-                        "Mensagem de erroo!".decode("utf-8"))
+                        "Mensagem de erroo! \n"+str(ex)+"".decode("utf-8"))
                         pass
                     pass
                 pass
@@ -117,6 +117,7 @@ class Open_Files(QDialog, Ui_MainWindow):
     # Evento do Botão Cancelar
     def evt_ButtonCancel(self):
         self.close()
+        exit(0)
         pass
 
     # Evento de abrir o ficheiro
